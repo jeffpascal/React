@@ -119,11 +119,12 @@ document.body.innerHTML = `
 </section>
 `;
 ```
+
 ## Creating Functions
 
 Any time you want to perform some sort of repeatable task with JavaScript, you can use a function. Let’s take a look at some of the different syntax options that can be used to create a function and the anatomy of those functions.
 
-## Function Declarations
+### Function Declarations
 
 A function declaration or function definition below starts with the function keyword which is followed by the name of the function logCompliment. The JavaScript statements that are part of the function are defined between the curly braces.
 
@@ -144,3 +145,180 @@ logCompliment();
 ```
 
 Once invoked, you’ll see the compliment logged to the console.
+
+### Function Expressions
+
+Another option is to use a function expression. This just involves creating the function as a variable:
+
+```js
+const logCompliment = function() {
+  console.log("You're doing great!");
+};
+
+logCompliment();
+```
+
+- One thing to be aware of when making a decision between a function declaration and a function expression is that function declarations are hoisted and function expressions are not. In other words, you can invoke a function before you write a function declaration. You can not invoke a function created by a function expression. This will cause an error. For example:
+
+```js
+// Invoking the function before it's declared
+hey();
+// Function Declaration
+function hey() {
+  alert("hey!");
+}
+```
+
+- This works. You’ll see the alert appear in the browser. It works because the function is hoisted, or moved up, to the top of the file’s scope. Trying the same exercise with a function expression will cause an error:
+
+```js
+// Invoking the function before it's declared
+hey();
+// Function Expression
+const hey = function() {
+  alert("hey!");
+};
+```
+
+Trying this will cause an error:
+
+```TypeError: hey is not a function```
+
+### PASSING ARGUMENTS
+
+The logCompliment function currently takes in no arguments or parameters. If we want to provide dynamic variables to the function, we can pass named parameters to a function simply by adding them to the parentheses. Let’s start by adding a firstName variable:
+
+```js
+const logCompliment = function(firstName) {
+  console.log(`You're doing great, ${firstName}`);
+};
+
+logCompliment("Molly");
+```
+
+Now when we call the logCompliment function, the firstName value sent will be added to the console message.
+
+We could add to this a bit by creating another argument called message. Now we won’t hard code the message. We’ll pass in a dynamic value as a parameter:
+
+```js
+const logCompliment = function(firstName, message) {
+  console.log(`${firstName}: ${message}`);
+};
+
+logCompliment("Molly", "You're so cool");
+```
+
+### FUNCTION RETURNS
+
+```js
+const createCompliment = function(firstName, message) {
+  return `${firstName}: ${message}`;
+};
+
+createCompliment("Molly", "You're so cool");
+```
+
+### Default Parameters
+
+For example, we can set up default strings for the parameters name and activity:
+
+```js
+function logActivity(name = "Shane McConkey", activity = "skiing") {
+  console.log(`${name} loves ${activity}`);
+}
+```
+
+If no arguments are provided to the logActivity function, it will run correctly using the default values. Default arguments can be any type, not just strings:
+
+```js
+const defaultPerson = {
+  name: {
+    first: "Shane",
+    last: "McConkey"
+  },
+  favActivity: "skiing"
+};
+
+function logActivity(person = defaultPerson) {
+  console.log(`${person.name.first} loves ${person.favActivity}`);
+}
+```
+
+## Arrow Functions
+
+Arrow functions are a useful new feature of ES6. With arrow functions, you can create functions without using the function keyword. You also often do not have to use the return keyword. Let’s consider a function that takes in a firstName and returns a string, turning the person into a Lord. Anyone can be a Lord.
+
+```js
+const lordify = function(firstName) {
+  return `${firstName} of Canterbury`;
+};
+
+console.log(lordify("Dale")); // Dale of Canterbury
+console.log(lordify("Gail")); // Gail of Canterbury
+```
+
+With an arrow function, we can simplify the syntax tremendously:
+
+```js
+const lordify = firstName => `${firstName} of Canterbury`;
+```
+
+- With the arrow, we now have an entire function declaration on one line. The function keyword is removed. We also remove return because the arrow points to what should be returned. Another benefit is that if the function only takes one argument, we can remove the parentheses around the arguments.
+
+### More than one argument should be surrounded by parentheses:
+
+```js
+// Typical function
+const lordify = function(firstName, land) {
+  return `${firstName} of ${land}`;
+};
+// Arrow Function
+const lordify = (firstName, land) => `${firstName} of ${land}`;
+
+console.log(lordify("Don", "Piscataway")); // Don of Piscataway
+console.log(lordify("Todd", "Schenectady")); // Todd of Schenectady
+```
+
+We can keep this as a one-line function because there is only one statement that needs to be returned. If there are multiple lines, you’ll use curly braces:
+
+```js
+const lordify = (firstName, land) => {
+  if (!firstName) {
+    throw new Error("A firstName is required to lordify");
+  }
+
+  if (!land) {
+    throw new Error("A lord must have a land");
+  }
+
+  return `${firstName} of ${land}`;
+};
+
+console.log(lordify("Kelly", "Sonoma")); // Kelly of Sonoma
+console.log(lordify("Dave")); // ! JAVASCRIPT ERROR
+```
+
+## Returning Objects
+
+What happens if you want to return an object? Consider a function called person that builds an object based on parameters passed in for firstName and lastName.
+
+```js
+const person = (firstName, lastName) =>
+    {
+        first: firstName,
+        last: lastName
+    }
+
+console.log(person("Brad", "Janson"));
+```
+
+As soon as we run this, you’ll see the error: Uncaught SyntaxError: Unexpected token :. To fix this, just wrap the object you’re returning with parentheses:
+
+```js
+const person = (firstName, lastName) => ({
+  first: firstName,
+  last: lastName
+});
+
+console.log(person("Flad", "Hanson"));
+```
