@@ -1,6 +1,3 @@
-# React
- Learning REACT
-
 - [React](#react)
   - [React Developer Tools](#react-developer-tools)
     - [aleternative: yarn](#aleternative-yarn)
@@ -12,6 +9,8 @@
     - [Function Declarations](#function-declarations)
     - [Function Expressions](#function-expressions)
 
+
+# React
 
 ## React Developer Tools
 
@@ -195,7 +194,7 @@ Trying this will cause an error:
 
 ```TypeError: hey is not a function```
 
-### PASSING ARGUMENTS
+### Passing Arguments
 
 The logCompliment function currently takes in no arguments or parameters. If we want to provide dynamic variables to the function, we can pass named parameters to a function simply by adding them to the parentheses. Let’s start by adding a firstName variable:
 
