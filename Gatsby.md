@@ -193,3 +193,42 @@ export default () => (
 Gatsby.js is a modern site generator, which means there are no servers to setup or complicated databases to deploy. Instead, the Gatsby build command produces a directory of static HTML and JavaScript files which you can deploy to a static site hosting service.
 
 Try using Surge for deploying your first Gatsby website. Surge is one of many “static site hosts” which make it possible to deploy Gatsby sites.
+
+## Introduction to Styling in Gatsby
+
+Import your recently-created stylesheet in the gatsby-browser.js file:
+
+### Normal bootstrap vs react-bootstrap
+
+```js
+import "./src/styles/global.css"
+
+// or:
+// require('./src/styles/global.css')
+```
+
+```js
+import React from 'react';
+import '../path_to/bootstrap.min.css';
+
+const MyComponent = () => (
+    <div>
+        <p>This contains a button which uses the bootstrap.css</p>
+        <button class="btn btn-primary">Click me</button>
+    </div>
+);
+```
+
+Second, you can use the components provided by reactbootstrap in your code (index.js, etc). Those components are already styled using bootstrap.
+
+```js
+import React from 'react';
+import { Button } from 'react-bootstrap';
+
+const MyComponent = () => (
+      <div>
+        <p>This contains a button which is exported by react-bootstrap</p>
+        <Button variant="primary">Primary</Button>
+    </div>
+);
+```
