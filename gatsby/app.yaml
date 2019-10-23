@@ -1,0 +1,25 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+
+#site root
+- url: /
+  static_files: public/index.html
+  upload: public/index.html
+
+# page-2
+- url: /page-2/
+  static_files: public/page-2/index.html
+  upload: public/page-2/index.html
+
+# Page not found
+- url: /.*
+  static_files: public/404/index.html
+  upload: public/404/index.html
+
+  # image files
+- url: /(.*\.(bmp|gif|ico|jpeg|jpg|png))
+  static_files: public/\1
+  upload: public/(.*\.(bmp|gif|ico|jpeg|jpg|png))
