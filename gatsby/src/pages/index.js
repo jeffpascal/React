@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 import logo from "../images/gatsby-icon.png"
+import logo2 from "../../static/secondicon.png"
 
 const IndexPage = () => (
   <Layout>
@@ -23,6 +24,8 @@ const IndexPage = () => (
       <h1>Hello Gatsby!</h1>
       <p>What a word</p>
       <img src={logo} alt="" />
+      <p>Second icon:</p>
+      <img src={logo2} alt="" />
     </div>
   </Layout>
 )

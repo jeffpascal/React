@@ -16,5 +16,10 @@ handlers:
 
 # Page not found
 - url: /.*
-  static_files: public/404/index.html 
+  static_files: public/404/index.html
   upload: public/404/index.html
+
+  # image files
+- url: /(.*\.(bmp|gif|ico|jpeg|jpg|png))
+  static_files: public/\1
+  upload: public/(.*\.(bmp|gif|ico|jpeg|jpg|png))
