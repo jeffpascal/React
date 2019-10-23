@@ -232,3 +232,105 @@ const MyComponent = () => (
     </div>
 );
 ```
+
+## Style a component using CSS Modules
+
+1. In this section, you’ll create a list of people with names, avatars, and short Latin biographies. You’ll create a <User /> component and style that component using a CSS module.
+
+- src/pages/about-css-modules.module.css
+  
+```css
+.user {
+  display: flex;
+  align-items: center;
+  margin: 0 auto 12px auto;
+}
+
+.user:last-child {
+  margin-bottom: 0;
+}
+
+.avatar {
+  flex: 0 0 96px;
+  width: 96px;
+  height: 96px;
+  margin: 0;
+}
+
+.description {
+  flex: 1;
+  margin-left: 18px;
+  padding: 12px;
+}
+
+.username {
+  margin: 0 0 12px 0;
+  padding: 0;
+}
+
+.excerpt {
+  margin: 0;
+}
+```
+3. Import the new src/pages/about-css-modules.module.css file into the about-css-modules.js page you created earlier by editing the first few lines of the file like so:
+
+```js
+import React from "react"
+import styles from "./about-css-modules.module.css"
+import Container from "../components/container"
+
+console.log(styles)
+```
+
+4. Create a new <User /> component inline in the about-css-modules.js page component. Modify about-css-modules.js so it looks like the following:
+
+- src/pages/about-css-modules.js
+
+```js
+import React from "react"
+import styles from "./about-css-modules.module.css"
+import Container from "../components/container"
+
+console.log(styles)
+
+const User = props => (
+  <div className={styles.user}>
+    <img src={props.avatar} className={styles.avatar} alt="" />
+    <div className={styles.description}>
+      <h2 className={styles.username}>{props.username}</h2>
+      <p className={styles.excerpt}>{props.excerpt}</p>
+    </div>
+  </div>
+)
+
+export default () => (
+  <Container>
+    <h1>About CSS Modules</h1>
+    <p>CSS Modules are cool</p>
+    <User
+      username="Jane Doe"
+      avatar="https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg"
+      excerpt="I'm Jane Doe. Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+    />
+    <User
+      username="Bob Smith"
+      avatar="https://s3.amazonaws.com/uifaces/faces/twitter/vladarbatov/128.jpg"
+      excerpt="I'm Bob Smith, a vertically aligned type of guy. Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+    />
+  </Container>
+)
+```
+
+- **tip** : Generally, if you use a component in multiple places on a site, it should be in its own module file in the **components** directory. But, if it’s used only in one file, create it inline.
+
+## images
+
+1. import
+
+- ```import logo from "../images/gatsby-icon.png"```
+
+2. use
+   
+-   ```<img src={logo} alt="" />```
+
+https://www.gatsbyjs.org/docs/importing-assets-into-files/

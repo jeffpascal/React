@@ -1,9 +1,20 @@
 runtime: python27
 api_version: 1
 threadsafe: true
+
 handlers:
+
+#site root
 - url: /
-  static_files: public/
+  static_files: public/index.html
   upload: public/index.html
-- url: /
-  static_dir: public/
+
+# page-2
+- url: /page-2/
+  static_files: public/page-2/index.html
+  upload: public/page-2/index.html
+
+# Page not found
+- url: /.*
+  static_files: public/404/index.html 
+  upload: public/404/index.html

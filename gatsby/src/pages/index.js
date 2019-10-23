@@ -4,6 +4,7 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
+import logo from "../images/gatsby-icon.png"
 
 const IndexPage = () => (
   <Layout>
@@ -21,7 +22,7 @@ const IndexPage = () => (
     <div style={{ color: `purple` }}>
       <h1>Hello Gatsby!</h1>
       <p>What a word</p>
-      <img src="https://source.unsplash.com/random/400x200" alt="" />
+      <img src={logo} alt="" />
     </div>
   </Layout>
 )
