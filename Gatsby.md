@@ -334,3 +334,7 @@ export default () => (
 -   ```<img src={logo} alt="" />```
 
 https://www.gatsbyjs.org/docs/importing-assets-into-files/
+
+3. create static folder in root
+4. import logo2 from "../../static/secondicon.png"
+5. <img src={logo2} alt="" />
