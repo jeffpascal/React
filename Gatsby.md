@@ -334,3 +334,122 @@ export default () => (
 -   ```<img src={logo} alt="" />```
 
 https://www.gatsbyjs.org/docs/importing-assets-into-files/
+
+3. create static folder in root
+4. import logo2 from "../../static/secondicon.png"
+5. <img src={logo2} alt="" />
+
+## Multiple Pages
+
+- populate the gatsby-note.js with the logic and data
+
+- we send the data from the json in the context to the template, and use it there
+
+```js
+exports.createPages = ({ actions }) => {
+    const data = require("./src/data/data.json")
+    const { createPage } = actions
+    data.forEach(data => {
+        createPage({
+            path: `/${data.slug}/`,
+            component: require.resolve('./src/templates/listing-template.js'),
+            context:{data},
+        })
+    })
+    
+  }
+```
+
+- Create a template for the pages you wish to create
+
+- listing-template.js
+
+- use the data sent as parameter with pageContext: and pass it as argument to the component that needs it
+
+```js
+import React from "react"
+import Listing2 from "../components/listing2"
+
+export default ({ pageContext: { data } }) => (
+    <div>
+   <p>{data.name}</p>
+    <Listing2 listing = {data} />
+   </div>
+)
+```
+
+- listing2.js the component
+- we can see the parameter when we declare the Listing2
+
+```js
+import React from "react"
+import "bootstrap/dist/css/bootstrap.min.css"
+
+const Listing2 = ({listing}) => {
+
+  const getCamere = camere =>
+    camere.map(camera => (
+      <div>
+        <p>
+          {camera.name} {camera.amount}
+        </p>
+      </div>
+    ))
+
+  const getDotari = dotari =>
+    dotari.map(dotare => (
+      <div>
+        <p>{dotare}</p>
+      </div>
+    ))
+
+  const getDescriere = descriere =>
+    descriere.map(descriere => (
+      <div>
+        {descriere.type === "normal" ? (
+          <p style={{ color: "red" }}>{descriere.text}</p>
+        ) : (
+          <p style={{ color: "purple" }}>{descriere.text}</p>
+        )}
+      </div>
+    ))
+
+  return (
+    <div className="container">
+      
+        <div className="jumbotron">
+          <h2>{listing.name}</h2>
+          <div className="row">
+            <div className="card col-md-4">
+              {//dotari
+              getDotari(listing.dotari)}
+            </div>
+
+            <div className="card col-md-4">
+              {//camere
+              listing.camere &&
+                listing.camere.length > 0 &&
+                getCamere(listing.camere)}
+            </div>
+            <div className="card col-md-3">
+              {//descriere
+              getDescriere(listing.detaliidescriere)}
+            </div>
+          </div>
+        </div>
+      
+    </div>
+  )
+}
+export default Listing2;
+```
+
+
+
+
+
+
+
+
+
+
