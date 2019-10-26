@@ -445,6 +445,12 @@ export default Listing2;
 ```
 
 
+## next steps
+
+https://www.gatsbyjs.org/docs/localization-i18n/
+
+https://stackoverflow.com/questions/49844515/how-do-i-stop-my-bootstrap-carousel-from-changing-size
+
 
 ## Sending parameters to querry:
 
