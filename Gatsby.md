@@ -446,10 +446,71 @@ export default Listing2;
 
 
 
+## Sending parameters to querry:
+
+- gatsby-node.js
+```js
+exports.createPages = ({ actions }) => {
+    const jsonData = require("./src/data/data.json")
+    const { createPage } = actions
+    jsonData.forEach(item => {
+        createPage({
+            path: `/${item.slug}/`,
+            component: require.resolve('./src/templates/listing-template.js'),
+            context:{
+            item,
+            slug: item.slug},
+        })
+    })
+    
+  }
+```
+
+- data contains the querry result
+- pageContext contains item and slug from the createPage
+
+- template
+```js
+import React from "react"
+import Listing2 from "../components/listing2"
+import Slick from "../components/slickgallery"
+export default  ({ pageContext, data }) => {
 
 
+    return (
+        <div className="jumbotron">
+        
+        
+        <Slick images = {data}/>
+        <Listing2 listing = {pageContext.item}/>
+        </div>
+    )
+  }
 
 
+export const  query  = 
+    graphql`
+      query queryone($slug: String!) {
+        allFile(
+          sort: { fields: name, order: DESC }
+          filter: { relativeDirectory: { eq: $slug } }
+        ) {
+          edges {
+            node {
+              id
+              name
+              childImageSharp {
+                fluid(maxWidth: 350, maxHeight: 250) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
+        }
+      }
+    `
+```
 
+## Awesome debugging line 
 
-
+```<pre>{JSON.stringify(data, null, 2)}</pre>```
