@@ -37,12 +37,10 @@
     <script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js"></script>
 
     <script>
-        import {data} from "./data";
-        console.log(data);
-        const dish = React.createElement("h1", null, "Baked Salmon");
+                const dish = React.createElement("h1", null, "Baked Salmon");
         const dessert = React.createElement("h2", null, "Coconut Cream Pie");
 
-        function IngredientsList() {
+        const IngredientsList = () => {
             return React.createElement(
                 "ul", {
                     className: "ingredients"
