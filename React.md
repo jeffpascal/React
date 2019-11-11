@@ -223,6 +223,40 @@ ReactDOM.render(
 );
 ```
 
+## Using array instead
 
+``` js
+const ingredients =[
+    "1 cup unsalted butter",
+    "1 cup crunchy peanut butter",
+    "1 cup brown sugar",
+    "1 cup white sugar",
+];
+const IngredientsList = () =>{
+    return React.createElement(
+        "ul", {
+            className: "ingredients"
+        },
+        ingredients.map(ingredient => React.createElement("li", null, ingredient)) 
+    );
+}
+ReactDOM.render(
+    React.createElement(IngredientsList, null, null),
+    document.getElementById("root")
+);
+```
 
+### Fix key error
+
+To fix key error, specify a key to the list for React to more efficiently generate the DOM:
+
+```js
+const IngredientsList = () => {
+ return React.createElement(
+     "ul", {
+         className: "ingredients"
+     },
+     ingredients.map((ingredient , i )=> React.createElement("li", {key : i}, ingredient)) 
+ );
+ ```
 
