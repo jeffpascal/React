@@ -1,3 +1,14 @@
+- [Page Setup](#page-setup)
+- [React DOM](#react-dom)
+  - [Children](#children)
+  - [Constructing elements with data](#constructing-elements-with-data)
+- [React Components](#react-components)
+- [Using array instead](#using-array-instead)
+  - [Fix key error](#fix-key-error)
+- [Mapping arrays with JSX](#mapping-arrays-with-jsx)
+- [Project setup](#project-setup)
+- [Spread operator](#spread-operator)
+
 ## Page Setup
 
 In order to work with React in the browser, we need to include two libraries: React and ReactDOM. React is the library for creating views. ReactDOM is the library used to actually render the UI in the browser. Both libraries are available as scripts from the unpkg CDN. Let’s set up an HTML document:
@@ -260,3 +271,60 @@ const IngredientsList = () => {
  );
  ```
 
+## Mapping arrays with JSX
+
+JSX is JavaScript, so you can incorporate JSX directly inside of JavaScript functions. For example, you can map an array to JSX elements:
+
+```js
+<ul>
+  {props.ingredients.map((ingredient, i) => (
+    <li key="{i}">{ingredient}</li>
+  ))}
+</ul>
+```
+
+## Project setup
+
+1. Create the Project
+
+Next, we’ll create the project and package.json file with npm, sending the -y flag to use all of the defaults. We’ll also install webpack, webpack-cli, react, and react-dom:
+
+```js
+npm init -y
+npm install react react-dom
+```
+
+f you’re using npm 5+, you don’t need to send the --save flag when installing. Next, we’ll create the following directory structure to house the components:
+
+```js
+recipes-app (folder)
+  > node_modules (already added with npm install command)
+  > package.json (already added with npm init command)
+  > package-lock.json (already added with npm init command)
+  > index.html
+  > /src (folder)
+    > index.js
+    > /data (folder)
+      > recipes.json
+    > /components (folder)
+      > Recipe.js
+      > Instructions.js
+      > Ingredients.js
+```
+
+## Spread operator
+
+Using spread operator:
+
+
+```<Ingredient {...ingredient} />```
+
+is another way of expressing:
+
+```js
+<Ingredient
+  amount={ingredient.amount}
+  measurement={ingredient.measurement}
+  name={ingredient.name}
+/>
+```
